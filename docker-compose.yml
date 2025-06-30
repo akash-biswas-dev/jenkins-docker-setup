@@ -1,0 +1,23 @@
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:jdk21
+    ports:
+      - "9999:8080"
+    networks:
+      - jenkins_network
+    volumes:
+      - ./jenkins:/var/jenkins_home
+
+  agent:
+    container_name: agent
+    image: jenkins/ssh-agent:latest-debian-jdk21
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkc16tuaowQITs99voO2PiA2lYgLzVfJJR3APpXtDNC akash@fedora
+    networks:
+      - jenkins_network
+    volumes:
+      - ./agent:/home/jenkins
+networks:
+  jenkins_network:
+    driver: bridge
