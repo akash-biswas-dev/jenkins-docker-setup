@@ -1,7 +1,7 @@
 services:
   jenkins:
     container_name: jenkins
-    image: jenkins/jenkins:jdk21
+    image: jenkins/jenkins:2.516.1-lts-jdk21
     restart: always
     ports:
       - "9999:8080"
