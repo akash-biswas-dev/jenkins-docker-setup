@@ -9,20 +9,9 @@ services:
       - jenkins_network
     volumes:
       - jenkins:/var/jenkins_home
-  agent:
-    container_name: agent
-    image: biswasakash/builder-agent:latest
-    privileged: true
-    restart: always
-    environment:
-      - JENKINS_AGENT_SSH_PUBKEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM62ZFyBTRyr6tbGzpZcxfsBtofJQ0XXq3+VQspzLY4I akash@workstation
-    networks:
-      - jenkins_network
-    volumes:
-      - agent:/home/jenkins
-networks:
-  jenkins_network:
-    driver: bridge
 volumes:
   jenkins:
-  agent:
+networks:
+  jenkins_network:
+    external: true
+    name: global_jenkins_network
