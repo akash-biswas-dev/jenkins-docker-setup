@@ -9,9 +9,17 @@ services:
       - jenkins_network
     volumes:
       - jenkins:/var/jenkins_home
+  agent:
+    container_name: build-agent
+    image: biswasakash/docker-ssh-agent:latest
+    environment:
+      - JENKINS_PUBLIC_KEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM62ZFyBTRyr6tbGzpZcxfsBtofJQ0XXq3+VQspzLY4I akash@workstation
+    privileged: true
+    networks:
+      - jenkins_network
 volumes:
   jenkins:
 networks:
   jenkins_network:
     external: true
-    name: global_jenkins_network
+    name: global-jenkins-network
