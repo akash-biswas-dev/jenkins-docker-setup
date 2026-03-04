@@ -14,7 +14,8 @@ RUN apk add --no-cache  \
     shadow \
     curl \
     openjdk21 \
-    openssh
+    openssh \
+    make
 
 RUN addgroup sudo
 
